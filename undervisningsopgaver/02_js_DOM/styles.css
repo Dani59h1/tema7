@@ -1,0 +1,45 @@
+img {
+  width: 100%;
+  max-width: 1000px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid black;
+}
+
+section {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2rem;
+  margin-inline: 5rem;
+  gap: 1rem;
+}
+
+h2 {
+  margin-inline: 5rem;
+  margin-top: 1rem;
+}
+
+article {
+  border: 2px solid black;
+  flex: 400px;
+}
+footer {
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid black;
+  border-top: 2px solid black;
+  padding: 1rem;
+}

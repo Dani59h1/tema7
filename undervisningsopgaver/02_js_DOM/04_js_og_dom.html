@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>komnumand</title>
+    <link rel="stylesheet" href="styles.css">
+<style>
+    article:nth-child(1) {
+  color: lime;
+}
+
+article:nth-child(2) {
+  color: red;
+}
+</style>
+</head>
+
+
+<body>
+    
+<header>
+    <h1>Titel</h1>
+</header>
+
+<main>
+
+    <h2>Undertitel</h2>
+
+    <section>
+
+        <article>
+        <img src="https://placeimg.com/640/480/people" alt="billede1">
+        <h3>article 1</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et quis illo placeat minus delectus quo reprehenderit. Iusto nostrum porro neque beatae optio corrupti? Quae, aspernatur?</p>
+        </article>
+
+        <article>
+        <img src="https://placeimg.com/640/480/nature" alt="billede2">
+        <h3>article 2</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque, soluta sunt. Illum odio ducimus totam nulla, rerum veniam asperiores, molestiae magnam perferendis deserunt modi animi?</p>
+        </article>
+
+    </section>
+
+</main>
+
+
+<footer>
+<p>This is the footer</p>
+</footer>
+
+<script>
+
+const article2 = document.querySelector("article:nth-child(2)");
+    article2.textContent;
+console.log(article2.textContent);
+
+const tekst01 = document.querySelector("article:nth-child(1) p");
+tekst01.textContent;
+console.log(tekst01.textContent);
+tekst01.textContent = "Her er noget tekst til artiklen"
+    console.log(tekst01.textContent);
+
+    const tekst02 = document.querySelector("article:nth-child(2) p");
+        tekst02.textContent;
+        console.log(tekst02.textContent);
+        tekst02.innerHTML = "Her er noget mere <b>tekst</b> til artiklen"
+        console.log(tekst02.textContent);
+
+    const img01 = document.querySelector("article:nth-child(1) img");
+    console.log(img01);
+       img01.src = "vand1.jpg"
+
+    const img02 = document.querySelector("article:nth-child(2) img");
+    console.log(img02);
+    img02.src = "vand1.jpg"
+    img02.alt = "hahahahahah"
+
+let mainSection = document.querySelector("section");
+let newArticle = document.createElement("article");
+let overskrift4 = document.createElement("h3")
+let overskrifttekst = document.createTextNode("article 3");
+overskrift4.appendChild(overskrifttekst);
+newArticle.appendChild(overskrift4);
+mainSection.appendChild(newArticle);
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

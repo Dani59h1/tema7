@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JS Objekter</title>
+    <style>
+        section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 10px;
+        }
+
+        article {
+            border: 1px solid #333;
+            padding: 10px;
+        }
+
+        img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+
+    </section>
+
+    <template>
+        <article>
+            <h2></h2>
+            <img src="" alt="">
+            <p class="art"></p>
+            <p class="sted"></p>
+        </article>
+    </template>
+    <script>
+        let dyr = [{
+            "navn": "Filmnavn 1",
+            "type": "Pattedyr",
+            "levested": "svinesti",
+            "billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/Q8K1pZrOs03Q0IrDkBwGVu5r-360.jpg"
+        },  {
+            "navn": "Filmnavn 2",
+            "type": "krybdyr",
+            "levested": "vandhul",
+            "billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/W6dOqabNhHKBPXxxKKEZRA84-360.jpg"
+        }, {
+            "navn": "Filmnavn 3",
+            "type": "Pattedyr",
+            "levested": "byen",
+            "billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/hUd4SdGQ8I23ovxWnGtBz4Ck-360.jpg"
+        }, {
+            "navn": "Filmnavn 4",
+            "type": "fisk",
+            "levested": "havet",
+            "billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/Zdt2ODEqSVOkNe8nUaSSu8kd-360.jpg"
+        }, {
+            "navn": "Filmnavn 5",
+            "type": "krybdyr",
+            "levested": "floder",
+            "billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/HRZBn8KLPmvVNvoJ4e8CzUVU-360.jpg"
+        }]
+
+        let container = document.querySelector("section");
+        let temp = document.querySelector("template");
+
+        //løb igennem array "dyr"
+        dyr.forEach(etDyr => {
+
+            let klon = temp.cloneNode(true).content;
+            klon.querySelector("h2").textContent = etDyr.navn;
+            klon.querySelector(".art").textContent = etDyr.type;
+            klon.querySelector(".sted").textContent = etDyr.levested;
+            klon.querySelector("img").src = etDyr.billede;
+            container.appendChild(klon);
+
+
+        })
+
+    </script>
+</body>
+
+</html>

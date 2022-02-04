@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JS Objekter</title>
+</head>
+
+<body>
+    <article>
+
+    </article>
+    <script>
+        let dyr = [{
+            "navn": "Gris",
+            "type": "Pattedyr",
+            "levested": "svinesti",
+            "billede": "http://mabe-kea.dk/E19/pics/pig.png"
+        }, {
+            "navn": "frø",
+            "type": "Pattedyr",
+            "levested": "stald",
+            "billede": "http://mabe-kea.dk/E19/pics/frog.png"
+        }, {
+            "navn": "fox",
+            "type": "krybdyr",
+            "levested": "skoven",
+            "billede": "http://mabe-kea.dk/E19/pics/fox.png"
+        }, {
+                "navn": "sild",
+                "type": "fisk",
+                "levested": "vand",
+            "billede": "http://mabe-kea.dk/E19/pics/sild.jpg"
+            }, {
+                "navn": "krokodille",
+                "type": "krybdyr",
+                "levested": "hvor du mindst forventer det",
+            "billede": "http://mabe-kea.dk/E19/pics/kroko.jpg"
+            }]
+
+        let elm = document.querySelector("article");
+        //løb igennem array "dyr"
+        dyr.forEach(etDyr => {
+            console.log(etDyr.navn);
+            elm.innerHTML += `<p>Navn: ${etDyr.navn} Type: ${etDyr.type} Levested: ${etDyr.levested} </p> <img src=${etDyr.billede}>`;
+        })
+
+
+
+    </script>
+</body>
+
+</html>

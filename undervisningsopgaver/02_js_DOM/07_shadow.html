@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07</title>
+    <link rel="stylesheet" href="styles.css">
+<style>
+    article:nth-child(1) {
+  color: lime;
+}
+
+article:nth-child(2) {
+  color: red;
+  
+}
+
+.artikel {
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+
+</style>
+</head>
+
+
+<body>
+    
+<header>
+    <h1>Titel</h1>
+</header>
+
+<main>
+
+    <h2>Undertitel</h2>
+
+    <section>
+
+        <article>
+        <img src="https://placeimg.com/640/480/people" alt="billede1">
+        <h3>article 1</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et quis illo placeat minus delectus quo reprehenderit. Iusto nostrum porro neque beatae optio corrupti? Quae, aspernatur?</p>
+        </article>
+
+        <article>
+        <img src="https://placeimg.com/640/480/nature" alt="billede2">
+        <h3>article 2</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque, soluta sunt. Illum odio ducimus totam nulla, rerum veniam asperiores, molestiae magnam perferendis deserunt modi animi?</p>
+        </article>
+
+    </section>
+
+</main>
+
+
+<footer>
+<p>This is the footer</p>
+</footer>
+
+<script>
+
+     document.addEventListener("DOMContentLoaded", start);
+
+function start() {
+    console.log("loaded")
+        
+
+    const overskrift = document.querySelector("h1");
+        overskrift.textContent;
+        console.log(overskrift.textContent);
+        overskrift.textContent = "Billeder";
+        console.log(overskrift.textContent);
+
+        const overskrift2 = document.querySelector("h2");
+        overskrift2.textContent;
+        console.log(overskrift2.textContent);
+
+        const overskrift3 = document.querySelector("h3");
+        overskrift3.textContent;
+        console.log(overskrift3.textContent);
+
+        const ftr = document.querySelector("footer");
+        ftr.textContent;
+        console.log(ftr.textContent);
+
+        const paragraf = document.querySelector("p");
+        paragraf.textContent;
+        console.log(paragraf.textContent);
+
+        const image = document.querySelector("img");
+        image.textContent;
+        console.log(image.textContent);
+
+        const artikel = document.querySelector("article");
+        artikel.textContent;
+        console.log(artikel.textContent);
+
+        const main = document.querySelector("main");
+        main.textContent;
+        console.log(main.textContent);
+
+        const section = document.querySelector("section");
+        section.textContent;
+        console.log(section.textContent);
+
+        const hoved = document.querySelector("header");
+        hoved.textContent;
+        console.log(hoved.textContent);
+
+    const article2 = document.querySelector("article:nth-child(2)");
+        article2.textContent;
+    console.log(article2.textContent);
+
+    const tekst01 = document.querySelector("article:nth-child(1) p");
+    tekst01.textContent;
+    console.log(tekst01.textContent);
+    tekst01.textContent = "Her er noget tekst til artiklen"
+        console.log(tekst01.textContent);
+
+    const tekst02 = document.querySelector("article:nth-child(2) p");
+        tekst02.textContent;
+        console.log(tekst02.textContent);
+        tekst02.innerHTML = "Her er noget mere <b>tekst</b> til artiklen"
+        console.log(tekst02.textContent);
+
+    const img01 = document.querySelector("article:nth-child(1) img");
+    console.log(img01);
+       img01.src = "vand1.jpg"
+
+    const img02 = document.querySelector("article:nth-child(2) img");
+    console.log(img02);
+    img02.src = "vand1.jpg"
+    img02.alt = "hahahahahah"
+
+    // opg 05
+
+    let mainSection = document.querySelector("section");
+    let newArticle = document.createElement("article");
+    let overskrift4 = document.createElement("h3")
+    let overskrifttekst = document.createTextNode("article 3");
+    overskrift4.appendChild(overskrifttekst);
+    newArticle.appendChild(overskrift4);
+    mainSection.appendChild(newArticle);
+
+    //opg 06
+
+    img01.addEventListener("click", doSomething);
+    function doSomething() {
+        img01.removeEventListener("click", doSomething);
+        myRandom = Math.floor(Math.random() * 10) + 1;
+        img01.src = "https://placeimg.com/400/300/arch?t=" + myRandom;
+    }
+
+    img02.addEventListener("click", fuck);
+    function fuck() {
+        img02.removeEventListener("click", fuck);
+        myRandom = Math.floor(Math.random() * 10) + 1;
+        img02.src = "https://placeimg.com/400/300/arch?t=" + myRandom;
+        
+    }
+
+    // opg 7
+
+
+         document.querySelector("article:nth-child(1)").classList.add("artikel");
+         document.querySelector("article:nth-child(2)").classList.add("artikel");
+         document.querySelector("article:nth-child(3)").classList.add("artikel");
+
+    
+    artikel.addEventListener("mouseover", hovering)
+    article2.addEventListener("mouseover", hovering)
+    newArticle.addEventListener("mouseover", hovering)
+
+    function hovering() {
+       this.classList.remove("artikel");
+    }
+
+    
+      
+
+    artikel.addEventListener("mouseout", back)
+     article2.addEventListener("mouseout", back)
+    newArticle.addEventListener("mouseout", back)
+    function back() {
+        this.classList.add("artikel");
+    }
+
+
+
+}
+
+</script>
+
+
+</body>
+</html>

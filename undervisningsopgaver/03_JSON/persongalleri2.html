@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>fff</title>
+
+    <style>
+         section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 10px;
+        }
+        article {
+            border: 1px solid #333;
+            padding: 10px;
+            margin: 1em;
+        }
+
+        img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    
+<section></section>
+
+<template>
+    <article>
+        <h2></h2>
+        <img class="billedurl" src="" alt="">
+        <p class="email"></p>
+        <p class="art"></p>
+        <p class="sted"></p>
+    </article>
+</template>
+    
+<script>
+
+const container = document.querySelector("section");
+const temp = document.querySelector("template");
+
+const url = "https://fml07-4e8a.restdb.io/rest/medlemmer";
+const key = "61fcf7ea3f215f310a37be69";
+
+const options = {
+headers: {
+"x-apikey": key,
+}
+}
+
+async function hentdata(url) {
+        const result = await fetch(url, options);
+        const json = await result.json();
+        vis(json);
+    }
+
+function vis(json) {
+         console.log(json);
+     }
+
+    function vis(personer) {
+        personer.forEach(person => {
+            const klon = temp.cloneNode(true).content;
+            klon.querySelector("h2").textContent = person.fornavn + " " + person.efternavn;
+            klon.querySelector(".email").textContent = person.email;
+            klon.querySelector("img").src = "faces/"+person.mainbillede;
+            
+            
+           
+            container.appendChild(klon);
+        })
+    }
+
+
+hentdata(url);
+
+
+</script>
+</body>
+</html>
