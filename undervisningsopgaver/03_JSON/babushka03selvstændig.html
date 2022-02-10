@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>babush3selv</title>
+  <link rel="stylesheet" href="">
+
+  <style>
+
+    /* body {
+      background-color: #f1dfb8;
+    } */
+
+    img {
+      width: 100%;
+    }
+
+    * {
+      margin: 0;
+    }
+
+    main {
+      margin-inline: 2rem;
+
+    }
+
+   section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 10px;
+        }
+
+    template article{
+        border: 5px outset orange;
+        padding: 10px;
+        margin: 10px;
+      }
+
+      #modal{
+        display: none;
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        background-color: rgba(0, 0, 0, 0.8);
+        left: 0;
+        top: 0;
+        
+      }
+
+      #modal article 
+      {
+        max-width: 50%;
+        margin: auto;
+        margin-block: 5rem;
+
+        background-color: rgb(255, 184, 184);
+        
+    
+
+      }
+
+     
+
+      nav {
+        margin-left: 1rem;
+      }
+
+      button {
+        background-color: rgb(231, 231, 231);
+        border: outset;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        margin: 4px 2px;
+        cursor: pointer;
+        color: #e74b4b;
+        margin-bottom: 1rem;
+      }
+
+      button:hover {
+       
+        transform: scale(1.1);
+}
+      .valgt {
+            background-color: rgb(248, 236, 66);
+        }
+
+      article:nth-child(even) {
+            background: rgba(255, 138, 138, 0.27);
+        }
+
+        article:nth-child(odd) {
+            background: #e45b5b;
+        }
+
+        #babush {
+          background-color: yellow;
+          padding-block: 5rem;
+          margin-bottom: 1rem;
+        }
+
+        header {
+          margin-inline: 0;
+        }
+
+        h1 {
+          text-align: center;
+          color: #e45b5b;
+          font-size: 3rem;
+        }
+
+        .h2modal {
+          color: #e74b4b;
+        }
+
+        .lang
+        {
+          padding-block: 0.5rem;
+        }
+
+        .modalprice {
+          font-weight: bold;
+          padding-bottom: 0.5rem;
+          size: 1.5rem;
+        }
+
+        
+
+  </style>
+
+</head>
+
+
+<body>
+  <header>
+    <div class="background">
+      <div id="babush">
+          <h1>BISTRO BABUSHKA</h1>
+      </div>
+      
+    </div>
+  </header>
+
+<main>
+  <nav>
+    <button data-kategori="alle" class="valgt">Alle</button>
+    <button data-kategori="forretter">Forretter</button>
+    <button data-kategori="hovedretter">Hovedretter</button>
+    <button data-kategori="sideorders">Sideorders</button>
+    <button data-kategori="desserter">Desserter</button>
+    <button data-kategori="drikkevarer">Drikkevarer</button>
+
+  </nav>
+
+  <!-- <h1>Alle</h1> -->
+
+  <aside id="modal">
+    <article>
+      <img src="" alt="">
+  
+      <h2 class="h2modal"></h2>
+      <p class="lang"></p>
+      <p class="price modalprice"></p>
+    </article>
+  
+  
+  </aside>
+
+
+  <section class="displaygrid"></section>
+  <template>
+    
+    <article class="grid">
+      <img src="" alt="">
+
+      <h2></h2>
+      <p class="kort"></p>
+      <p class="price"></p>
+
+
+
+    </article>
+    
+  </template>
+ 
+  
+  
+
+
+</main>
+
+
+  <script>
+
+    const url = "https://babushka-dd8a.restdb.io/rest/menu";
+    const key = "600ec2fb1346a1524ff12de4";
+    const modal = document.querySelector("#modal")
+
+    const options = {
+        headers: {
+          "x-apikey": key,
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", start)
+      let personer;
+      let filter = "alle"
+      
+        
+
+      function start() {
+        const filterKnapper = document.querySelectorAll("button");
+        filterKnapper.forEach(knap => knap.addEventListener("click", filtrerPersoner))
+        hentdata();
+      }
+
+      function filtrerPersoner() {
+        filter = this.dataset.kategori;
+        document.querySelector(".valgt").classList.remove("valgt")
+        this.classList.add("valgt")
+        visPersoner();
+      }
+
+
+      async function hentdata() {
+          const result = await fetch(url, options);
+          personer = await result.json();
+          visPersoner();
+        }
+
+
+
+        function visPersoner() {
+
+          const dest = document.querySelector(".displaygrid");
+          const skabelon = document.querySelector("template");
+          dest.textContent = "";
+
+//'person' er alle data om en person
+          personer.forEach(person => {
+            if (filter == "alle" || filter == person.kategori) {
+              const klon = skabelon.cloneNode(true).content;
+               klon.querySelector("h2").textContent = person.navn;
+              klon.querySelector(".kort").textContent = person.kortbeskrivelse;
+              klon.querySelector("img").src = "medium/" + person.billednavn + "-md.jpg";
+              klon.querySelector(".price").textContent = "pris:" + person.pris;
+             
+              //article så man kan klikke på hele artiklen. Ret til img hvis man kun skal kunne klikke på billedet
+              // hop til ny lokation: 
+              // klon.querySelector("article").addEventListener("click", ()=> {location.href = "http://kea.dk"});
+              klon.querySelector("article").addEventListener("click", () => visDetaljer(person));
+              dest.appendChild(klon);
+            }
+          });
+        
+          function visDetaljer(object) {
+            location.href = `idunno.html?id=${object._id}`
+          }
+            
+          
+
+        
+
+        }
+  </script>
+
+</body>
+
+</html>

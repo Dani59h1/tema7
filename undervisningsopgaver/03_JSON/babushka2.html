@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>idunno</title>
+  <link rel="stylesheet" href="">
+
+  <style>
+
+    img {
+      width: 100%;
+    }
+
+   section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 10px;
+        }
+
+    article{
+        border: 1px solid orange;
+        padding: 10px;
+        margin: 10px;
+      }
+
+      article:nth-child(even) {
+            background: rgba(255, 138, 138, 0.27);
+        }
+
+        article:nth-child(odd) {
+            background: #e45b5b;
+        }
+  </style>
+
+</head>
+
+
+<body>
+  <header>
+    <div class="background">
+      <div id="babush">
+        <img src="imgs/large/red-star-pza.png" alt="img">
+      </div>
+      <div id="overskrift">Bistro Babushka</div>
+    </div>
+  </header>
+
+
+  <nav>
+    <button class="filter valgt" data-kategori="alle">Alle</button>
+    <button class="filter" data-kategori="forretter">Forretter</button>
+    <button class="filter" data-kategori="hovedretter">Hovedretter</button>
+    <button class="filter" data-kategori="desserter">Desserter</button>
+    <button class="filter" data-kategori="drikkevarer">Drikkevarer</button>
+
+  </nav>
+
+  <h1>Alle</h1>
+
+  <section class="displaygrid">
+  <template>
+    
+    <article class="grid">
+      <img src="" alt="">
+
+      <h2></h2>
+      <p class="kort"></p>
+      <p class="price">Pris: </p>
+
+
+
+    </article>
+    
+  </template>
+  </section>
+
+  
+
+
+
+
+
+  <script>
+
+    
+      const container = document.querySelector("section");
+      const personliste = document.querySelector(".personliste");
+      const temp = document.querySelector("template");
+      // let json;
+      let filter = "alle"
+      const filterKnapper = document.querySelectorAll("nav button")
+      filterKnapper.forEach(knap => knap.addEventListener("click", filtrerMad))
+
+      function filtrerMad() {
+        filter = this.dataset.kategori;
+        vis();
+      }
+
+      const url = "https://babushka-dd8a.restdb.io/rest/menu";
+      const key = "600ec2fb1346a1524ff12de4";
+
+      const options = {
+        headers: {
+          "x-apikey": key,
+        }
+      }
+
+      async function hentdata(url) {
+        const result = await fetch(url, options);
+        json = await result.json();
+        vis();
+      }
+
+     
+
+      function vis() {
+        json.forEach(mad => {
+        if (filter == mad.kategori || filter == "alle" ) {
+          const klon = temp.cloneNode(true).content;
+          klon.querySelector("h2").textContent = mad.navn;
+          klon.querySelector(".kort").textContent = mad.kortbeskrivelse;
+          // // klon.querySelector(".email").textContent = mad.langbeskrivelse;
+          klon.querySelector("img").src = "medium/" + mad.billednavn + "-md.jpg";
+          klon.querySelector(".price").textContent = "pris:" + mad.pris;
+   
+
+
+
+          container.appendChild(klon);
+        }
+        })
+      }
+
+
+      hentdata(url);
+
+
+    // document.addEventListener("DOMContentLoaded", getjson);
+    // const modtagerKloner = document.querySelector(".personliste");
+    // const temp = document.querySelector("template");
+    // let personer;
+    // let filter = "alle";
+
+    // async function getjson() {
+    //   let jsondata = await fetch("https://spreadsheets.google.com/feeds/list/17Dd7DvkPaFamNUdUKlrFgnH6POvBJXac7qyiS6zNRw0/od6/public/values?alt=json");
+    //   console.log("jsondata", jsondata);
+    //   minJson = await jsondata.json();
+    //   visJson();
+    //   addEventListenersToButtons();
+    // }
+
+    // function visJson() {
+    //   modtagerKloner.innerHTML = "";
+    //   minJson.feed.entry.forEach((person) => {
+    //     if (filter == "alle" || filter == person.gsx$kategori.$t) {
+    //       const klon = temp.cloneNode(true).content;
+    //       klon.querySelector("h2").textContent = person.gsx$navn.$t;
+    //       klon.querySelector(".kort").textContent = person.gsx$kort.$t;;
+    //       klon.querySelector("img").src = "imgs/small/" + person.gsx$billede.$t + "-sm.jpg";
+    //       klon.querySelector(".price").textContent += person.gsx$pris.$t;
+    //       modtagerKloner.appendChild(klon);
+    //       modtagerKloner.lastElementChild.addEventListener("click", () => {
+    //         visSingle(person)
+    //       });
+    //     }
+    //   })
+    // }
+
+    // function visSingle(person) {
+    //   document.querySelector("#popup").style.display = "block";
+    //   document.querySelector("#popup .luk").addEventListener("click", lukSingle);
+    //   document.querySelector(".enkeltPerson h2").textContent = person.gsx$navn.$t;
+    //   document.querySelector(".enkeltPerson .billedeo").src = "imgs/small/" + person.gsx$billede.$t + "-sm.jpg";
+    //   document.querySelector(".enkeltPerson .billedeo").alt = person.gsx$navn.$t;
+    //   document.querySelector(".enkeltPerson .kort").textContent = person.gsx$lang.$t;
+    // }
+    // function lukSingle() {
+    //   document.querySelector("#popup").style.display = "none";
+    // }
+
+
+    // function addEventListenersToButtons() {
+    //   document.querySelectorAll(".filter").forEach(elm => {
+    //     elm.addEventListener("click", filtrering);
+    //   })
+    // }
+    // function filtrering() {
+    //   filter = this.dataset.kategori;
+    //   document.querySelector("h1").textContent = this.textContent;
+    //   document.querySelectorAll(".filter").forEach(elm => {
+    //     elm.classList.remove("valgt");
+    //   })
+    //   this.classList.add("valgt");
+    //   visJson();
+    // }
+  </script>
+
+</body>
+
+</html>
