@@ -56,11 +56,7 @@
         margin-block: 5rem;
 
         background-color: rgb(255, 184, 184);
-        
-    
-
-      }
-
+        }
      
 
       nav {
@@ -156,8 +152,6 @@
 
   </nav>
 
-  <!-- <h1>Alle</h1> -->
-
   <aside id="modal">
     <article>
       <img src="" alt="">
@@ -186,10 +180,6 @@
     </article>
     
   </template>
- 
-  
-  
-
 
 </main>
 
@@ -240,7 +230,7 @@
           const skabelon = document.querySelector("template");
           dest.textContent = "";
 
-//'person' er alle data om en person
+          //'person' er alle data om en person
           personer.forEach(person => {
             if (filter == "alle" || filter == person.kategori) {
               const klon = skabelon.cloneNode(true).content;
@@ -260,12 +250,12 @@
           function visDetaljer(object) {
             location.href = `idunno.html?id=${object._id}`
           }
-            
-          
-
-        
-
+ 
         }
+
+       
+
+
   </script>
 
 </body>

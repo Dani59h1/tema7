@@ -59,7 +59,6 @@
         margin-block: 3rem;
 
         background-color: rgb(255, 184, 184);
-        
       }
 
      
@@ -239,8 +238,6 @@
       <p class="kort"></p>
       <p class="price"></p>
 
-
-
     </article>
     
   </template>
@@ -298,7 +295,7 @@
           const skabelon = document.querySelector("template");
           dest.textContent = "";
 
-//'person' er alle data om en person
+          //'person' er alle data om en person
           personer.forEach(person => {
             if (filter == "alle" || filter == person.kategori) {
               const klon = skabelon.cloneNode(true).content;
